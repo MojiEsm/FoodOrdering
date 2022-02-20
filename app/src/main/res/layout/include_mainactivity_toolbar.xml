@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="#353535"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:fontFamily="@font/iransans"
+        android:paddingRight="15dp"
+        android:gravity="center|right"
+        android:text="سفارش گیری"
+        android:textColor="@color/white"
+        android:textSize="14dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4"
+        android:fontFamily="@font/iransans"
+        android:gravity="center"
+        android:text="رستوران حسن بابا"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:fontFamily="@font/iransans"
+        android:gravity="center|left"
+        android:paddingLeft="15dp"
+        android:text="تنظیمات"
+        android:textColor="@color/white"
+        android:textSize="14dp" />
+</LinearLayout>

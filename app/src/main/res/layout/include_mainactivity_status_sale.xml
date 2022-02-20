@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/iransans"
+                android:gravity="center|right"
+                android:paddingVertical="10dp"
+                android:paddingRight="15dp"
+                android:text="فروش روزانه"
+                android:textColor="#767676"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/irsansfanum"
+                android:paddingVertical="10dp"
+                android:paddingLeft="15dp"
+                android:gravity="center|left"
+                android:text="125,000 تومان"
+                android:textColor="#767676"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/iransans"
+                android:gravity="center|right"
+                android:paddingVertical="10dp"
+                android:paddingRight="15dp"
+                android:text="فروش هفتگی"
+                android:textColor="#767676"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/irsansfanum"
+                android:paddingVertical="10dp"
+                android:paddingLeft="15dp"
+                android:gravity="center|left"
+                android:text="3,125,000 تومان"
+                android:textColor="#767676"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/iransans"
+                android:gravity="center|right"
+                android:paddingVertical="10dp"
+                android:paddingRight="15dp"
+                android:text="فروش ماهانه"
+                android:textColor="#767676"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/irsansfanum"
+                android:paddingVertical="10dp"
+                android:paddingLeft="15dp"
+                android:gravity="center|left"
+                android:text="10,500,000 تومان"
+                android:textColor="#767676"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/iransans"
+                android:gravity="center|right"
+                android:paddingVertical="10dp"
+                android:paddingRight="15dp"
+                android:text="فروش کل"
+                android:textColor="#767676"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/irsansfanum"
+                android:paddingVertical="10dp"
+                android:paddingLeft="15dp"
+                android:gravity="center|left"
+                android:text="55,000,000 تومان"
+                android:textColor="#767676"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
