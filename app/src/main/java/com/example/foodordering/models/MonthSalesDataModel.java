@@ -1,10 +1,10 @@
 package com.example.foodordering.models;
 
-public class MonthDalesDataModel {
+public class MonthSalesDataModel {
     String Month;
     int Sales;
 
-    public MonthDalesDataModel(String month, int sales) {
+    public MonthSalesDataModel(String month, int sales) {
         Month = month;
         Sales = sales;
     }

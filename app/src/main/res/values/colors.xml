@@ -7,4 +7,27 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!--    <color name="Primary">#fc710c</color>-->
+<!--    <color name="Primary">#71b24c</color>-->
+    <color name="Primary">#E6AC00</color>
+<!--    <color name="Secondary">#FFAB6E</color>-->
+    <color name="Secondary">#96B882</color>
+
+    <color name="bgStatus">#353535</color>
+
+    <color name="bg_toolbar_MainActivity">#353535</color>
+
+    <color name="textColor">#676767</color>
+    
+    <color name="mtrl_textinput_default_box_stroke_color" override="true">#E6AC00</color>
+
+    <color name="colorPrimaryDark">#E6AC00</color>
+    <color name="colorAccent">#FEC23B</color>
+    <color name="colorGreen">#1cb561</color>
+    <color name="colorBackWhite">#fbfbfd</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorFrontBlack">#E8E8E8</color>
+    <color name="colorBackGround">#37342f</color>
+    <color name="colorBackGroundDark">#0a0a0a</color>
 </resources>

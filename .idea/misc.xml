@@ -1,5 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/bg_alert_splash.xml" value="0.24166666666666667" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/bg_button_dialog_connection.xml" value="0.24166666666666667" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/bg_button_oval.xml" value="0.23703703703703705" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/bg_button_splash.xml" value="0.24166666666666667" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/bg_edt_login.xml" value="0.24166666666666667" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/border_spinner_add_food.xml" value="0.23703703703703705" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/border_til_login.xml" value="0.24166666666666667" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/dialog_check_connection.xml" value="0.24166666666666667" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/ic_baseline_arrow_back_ios_white_24.xml" value="0.24166666666666667" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/ripple_button_splash.xml" value="0.24166666666666667" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_add_category.xml" value="0.240625" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_add_customer.xml" value="0.240625" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_add_food_menu.xml" value="0.4" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_add_product.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_category.xml" value="0.240625" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_customers.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_login.xml" value="0.268" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_main.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_menu.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_splash.xml" value="0.240625" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/dialog_check_connection.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/include_barchart_mainactivity.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/include_bg_splash.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/include_mainactivity_barchart.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/include_mainactivity_selector.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/include_mainactivity_stats.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/include_mainactivity_status_sale.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/include_mainactivity_toolbar.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/include_selector_mainactivity.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/include_status_sale_mainactivity.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/include_toolbar_mainactivity.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_category_rv.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_customer_rv.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_menu_food_rv.xml" value="0.268" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_spinner_addfood.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/toolbar_back_splash.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/toolbar_back_title.xml" value="0.2546875" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

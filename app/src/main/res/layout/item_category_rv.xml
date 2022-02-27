@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/img_itemCategory"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/splash3"
+        android:scaleType="centerCrop"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/black"
+        android:alpha="0.6"/>
+
+    <TextView
+        android:id="@+id/txt_itemCategory_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="تست"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/iransans"
+        android:gravity="center"/>
+
+</RelativeLayout>

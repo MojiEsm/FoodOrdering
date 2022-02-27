@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView_itemMenuFood_RV"
+    android:layout_width="match_parent"
+    app:cardElevation="10dp"
+    android:outlineSpotShadowColor="@color/Primary"
+    android:layout_margin="5dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/lnr_ItemRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_itemFoodMenu"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:src="@drawable/splash3" />
+
+        <TextView
+            android:id="@+id/txt_itemFoodMenu_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/iransans"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:text="نام"
+            android:textColor="#252525"
+            android:textDirection="rtl"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/txt_itemFoodMenu_Category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/iransans"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:text="لیست"
+            android:textColor="#636363"
+            android:textDirection="rtl"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/txt_itemFoodMenu_Price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/irsansfanum"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="10dp"
+            android:text="39000"
+            android:textColor="@color/textColor"
+            android:textDirection="rtl"
+            android:textSize="12dp" />
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

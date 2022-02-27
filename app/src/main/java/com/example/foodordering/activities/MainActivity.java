@@ -1,14 +1,15 @@
-package com.example.foodordering;
+package com.example.foodordering.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
-import com.example.foodordering.activities.CategoryActivity;
-import com.example.foodordering.activities.CustomersActivity;
-import com.example.foodordering.activities.MenuActivity;
+import com.example.foodordering.R;
 import com.example.foodordering.models.MonthSalesDataModel;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
@@ -41,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void design() {
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.bgStatus));
     }
 
     private void findViews() {
@@ -52,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setListeners() {
         btn_Menu.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, MenuActivity.class));
+            startActivity(new Intent(MainActivity.this, ProductsActivity.class));
             overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
         });
 
