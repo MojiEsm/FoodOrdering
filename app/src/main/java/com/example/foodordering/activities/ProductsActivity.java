@@ -60,7 +60,7 @@ public class ProductsActivity extends AppCompatActivity {
     }
 
     private void designs() {
-        txt_Title.setText("منو");
+        txt_Title.setText("محصولات");
 
     }
 

@@ -1,11 +1,9 @@
 package com.example.foodordering.activities;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.widget.TextView;
@@ -71,7 +69,10 @@ public class CustomersActivity extends AppCompatActivity {
                 int position = viewHolder.getAdapterPosition();
                 switch (direction) {
                     case ItemTouchHelper.RIGHT:
-                        Toast.makeText(getApplicationContext(), "RIGHT", Toast.LENGTH_SHORT).show();
+                        CustomerModel customerModel = listData.get(position);
+                        Intent intent = new Intent(CustomersActivity.this, AddCustomerActivity.class);
+                        intent.putExtra("objectCustomer", customerModel);
+                        startActivity(intent);
                         adapterCustomerRv.notifyDataSetChanged();
                         break;
                     case ItemTouchHelper.LEFT:

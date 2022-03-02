@@ -26,8 +26,6 @@ public interface CategoryDao {
     @Delete
     void delete(CategoryModel categoryModel);
 
-    @Update
-    void update(CategoryModel categoryModel);
-
-
+    @Query("Update categoryTable set name = :sName , image = :sImage where ID = :sID")
+    void update(int sID, String sName, String sImage);
 }

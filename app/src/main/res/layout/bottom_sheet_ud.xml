@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_bottom_sheet"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/iransans"
+        android:text="انتخاب"
+        android:textAlignment="center"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/btn_Edit_BottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_baseline_edit_24"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/iransans"
+        android:paddingVertical="10dp"
+        android:paddingRight="10dp"
+        android:text="ویرایش"
+        android:textColor="@color/textColor"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/btn_Delete_BottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_baseline_delete_24"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/iransans"
+        android:paddingVertical="10dp"
+        android:paddingRight="10dp"
+        android:text="حذف"
+        android:textColor="@color/textColor"
+        android:textSize="16dp" />
+
+
+</LinearLayout>

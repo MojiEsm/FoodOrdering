@@ -1,11 +1,11 @@
 package com.example.foodordering.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodordering.R;
 import com.example.foodordering.database.DataBaseHelper;
@@ -19,7 +19,9 @@ import java.util.List;
 public class AddCustomerActivity extends AppCompatActivity {
     private DataBaseHelper dataBaseHelper;
     private CustomersDao customersDao;
-    private List<CustomerModel> listData = new ArrayList<>();
+
+    private CustomerModel customerModel;
+
     private TextView txt_Title, btn_Back, btn_Add;
     private TextInputEditText edt_FullName, edt_Address, edt_PhoneNumber;
 
@@ -28,35 +30,32 @@ public class AddCustomerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_customer);
-        dataBaseHelper = DataBaseHelper.getInstance(this);
-        customersDao = dataBaseHelper.customersDao();
 
+        db();
         findViews();
         designs();
         setListeners();
     }
 
-    private void setListeners() {
-        btn_Back.setOnClickListener(v -> {
-            startActivity(new Intent(AddCustomerActivity.this, CustomersActivity.class));
-            finish();
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        });
-        btn_Add.setOnClickListener(v -> {
+    private void db() {
+        dataBaseHelper = DataBaseHelper.getInstance(this);
+        customersDao = dataBaseHelper.customersDao();
 
-            if (!edt_FullName.getText().toString().equals("") && !edt_PhoneNumber.getText().toString().equals("") && !edt_Address.getText().toString().equals("")) {
-                customersDao.insert(new CustomerModel(edt_FullName.getText().toString(), edt_PhoneNumber.getText().toString(), edt_Address.getText().toString()));
-                Toast.makeText(this, "ثبت شد!", Toast.LENGTH_SHORT).show();
-
-                startActivity(new Intent(AddCustomerActivity.this, CustomersActivity.class));
-                finish();
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            } else {
-                Toast.makeText(this, "لطفا فیلد ها را پر کنید.", Toast.LENGTH_SHORT).show();
-            }
-        });
+        customerModel = (CustomerModel) getIntent().getSerializableExtra("objectCustomer");
     }
 
+    private void designs() {
+        txt_Title.setText("اضافه کردن کاربر");
+
+        if (customerModel != null) {
+            edt_FullName.setText(customerModel.fullName);
+            edt_PhoneNumber.setText(customerModel.phoneNumber);
+            edt_Address.setText(customerModel.address);
+            btn_Add.setText("ویرایش");
+        } else {
+            btn_Add.setText("ثبت");
+        }
+    }
 
     private void findViews() {
         txt_Title = findViewById(R.id.txt_toolbarBackTitle_Title);
@@ -67,7 +66,36 @@ public class AddCustomerActivity extends AppCompatActivity {
         btn_Add = findViewById(R.id.btn_AddCustomer_Add);
     }
 
-    private void designs() {
-        txt_Title.setText("اضافه کردن کاربر");
+    private void setListeners() {
+        btn_Back.setOnClickListener(v -> {
+            finishVoid();
+        });
+        btn_Add.setOnClickListener(v -> {
+            String sFullName = edt_FullName.getText().toString().trim();
+            String sNumberPhone = edt_PhoneNumber.getText().toString().trim();
+            String sAddress = edt_Address.getText().toString().trim();
+            if (!sFullName.equals("") && !sNumberPhone.equals("") && !sAddress.equals("")) {
+                if (customerModel == null) {
+                    customersDao.insert(new CustomerModel(sFullName, sNumberPhone, sAddress));
+                    Toast.makeText(this, "ثبت شد!", Toast.LENGTH_SHORT).show();
+                    finishVoid();
+
+                } else {
+                    int sID = customerModel.id;
+                    customersDao.update(sID, sFullName, sNumberPhone, sAddress);
+                    Toast.makeText(this, "ویرایش شد!", Toast.LENGTH_SHORT).show();
+                    finishVoid();
+                }
+            } else {
+                Toast.makeText(this, "لطفا فیلد ها را پر کنید.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+    private void finishVoid() {
+        startActivity(new Intent(AddCustomerActivity.this, CustomersActivity.class));
+        finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
 }

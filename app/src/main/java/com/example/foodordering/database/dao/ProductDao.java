@@ -19,4 +19,7 @@ public interface ProductDao {
 
     @Delete
     void delete(ProductsModel productsModel);
+
+    @Query("Update productsTable set name =:sName , img =:sImage , category=:sCategory , price =:sPrice where id =:sID")
+    void update(int sID, String sName, String sImage, String sCategory, Integer sPrice);
 }

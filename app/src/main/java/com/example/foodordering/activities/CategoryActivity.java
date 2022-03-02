@@ -23,6 +23,7 @@ import com.example.foodordering.database.dao.CategoryDao;
 import com.example.foodordering.models.CategoryModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +56,29 @@ public class CategoryActivity extends AppCompatActivity {
         listData = db.categoryDao().getList();
     }
 
+    private void designs() {
+        txt_Title.setText("دسته بندی");
+    }
+
+    private void findViews() {
+        txt_Title = findViewById(R.id.txt_toolbarBackTitle_Title);
+        btn_Back = findViewById(R.id.btn_toolbarBackTitle_Back);
+        fab_add = findViewById(R.id.fab_Category_Add);
+        recyclerView = findViewById(R.id.RV_Category);
+    }
+
+    private void setListeners() {
+        btn_Back.setOnClickListener(v -> {
+            finish();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        });
+        fab_add.setOnClickListener(v -> {
+            startActivity(new Intent(CategoryActivity.this, AddCategoryActivity.class));
+            finish();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        });
+    }
+
     private void adapter() {
         adapterCategoryRv = new Adapter_Category_RV(this, listData);
         recyclerView.setAdapter(adapterCategoryRv);
@@ -71,7 +95,12 @@ public class CategoryActivity extends AppCompatActivity {
                 int position = viewHolder.getAdapterPosition();
                 switch (direction) {
                     case ItemTouchHelper.RIGHT:
-                        Toast.makeText(getApplicationContext(), "Right", Toast.LENGTH_SHORT).show();
+                        CategoryModel categoryModel = listData.get(position);
+                        Intent intent = new Intent(CategoryActivity.this,AddCategoryActivity.class);
+                        intent.putExtra("objectModel", (Serializable) categoryModel);
+                        startActivity(intent);
+                        finish();
+
                         adapterCategoryRv.notifyDataSetChanged();
                         break;
                     case ItemTouchHelper.LEFT:
@@ -126,26 +155,4 @@ public class CategoryActivity extends AppCompatActivity {
         }).attachToRecyclerView(recyclerView);
     }
 
-    private void setListeners() {
-        btn_Back.setOnClickListener(v -> {
-            finish();
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        });
-        fab_add.setOnClickListener(v -> {
-            startActivity(new Intent(CategoryActivity.this, AddCategoryActivity.class));
-            finish();
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        });
-    }
-
-    private void designs() {
-        txt_Title.setText("دسته بندی");
-    }
-
-    private void findViews() {
-        txt_Title = findViewById(R.id.txt_toolbarBackTitle_Title);
-        btn_Back = findViewById(R.id.btn_toolbarBackTitle_Back);
-        fab_add = findViewById(R.id.fab_Category_Add);
-        recyclerView = findViewById(R.id.RV_Category);
-    }
 }

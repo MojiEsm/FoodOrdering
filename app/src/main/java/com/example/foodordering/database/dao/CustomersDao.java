@@ -20,4 +20,7 @@ public interface CustomersDao {
 
     @Delete
     void delete(CustomerModel customerModel);
+
+    @Query("Update customerTable set phoneNumber = :sPhoneNumber , fullName = :sName  ,address = :sAddress where ID = :sID")
+    void update(int sID, String sName, String sPhoneNumber, String sAddress);
 }

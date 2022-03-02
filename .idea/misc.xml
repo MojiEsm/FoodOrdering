@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/bg_alert_splash.xml" value="0.24166666666666667" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/bg_bottom_sheet.xml" value="0.22870370370370371" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/bg_button_dialog_connection.xml" value="0.24166666666666667" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/bg_button_oval.xml" value="0.23703703703703705" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/bg_button_splash.xml" value="0.24166666666666667" />
@@ -23,6 +24,7 @@
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_main.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_menu.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_splash.xml" value="0.240625" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/bottom_sheet_ud.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/dialog_check_connection.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/include_barchart_mainactivity.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/include_bg_splash.xml" value="0.2546875" />
@@ -37,6 +39,7 @@
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_category_rv.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_customer_rv.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_menu_food_rv.xml" value="0.268" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_products_rv.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_spinner_addfood.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/toolbar_back_splash.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/toolbar_back_title.xml" value="0.2546875" />
