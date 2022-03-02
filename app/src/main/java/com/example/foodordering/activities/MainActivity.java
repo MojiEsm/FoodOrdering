@@ -4,12 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.example.foodordering.R;
+import com.example.foodordering.database.DataBaseHelper;
+import com.example.foodordering.database.dao.CategoryDao;
+import com.example.foodordering.database.dao.CustomersDao;
+import com.example.foodordering.database.dao.ProductDao;
 import com.example.foodordering.models.MonthSalesDataModel;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
@@ -22,6 +27,11 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private DataBaseHelper dataBaseHelper;
+    private CategoryDao categoryDao;
+    private CustomersDao customersDao;
+    private ProductDao productDao;
+
     private BarChart barChart;
     private ArrayList<BarEntry> barEntryArrayList;
     private ArrayList<String> labelNames;
@@ -29,15 +39,25 @@ public class MainActivity extends AppCompatActivity {
 
     private CardView btn_Menu, btn_Customers, btn_Category;
 
+    private TextView txt_CustomerNo, txt_ProductNo, txt_CategoryNo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        design();
+        db();
         findViews();
+        design();
         setListeners();
         fillMonthSale();
         barChartAdapter();
+    }
+
+    private void db() {
+        dataBaseHelper = DataBaseHelper.getInstance(this);
+        customersDao = dataBaseHelper.customersDao();
+        categoryDao = dataBaseHelper.categoryDao();
+        productDao = dataBaseHelper.productDao();
     }
 
 
@@ -45,7 +65,12 @@ public class MainActivity extends AppCompatActivity {
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.bgStatus));
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.bgStatus));
+
+        //State Selector
+        txt_CategoryNo.setText(String.valueOf(categoryDao.getList().size()));
+        txt_CustomerNo.setText(String.valueOf(customersDao.getAll().size()));
+        txt_ProductNo.setText(String.valueOf(productDao.getList().size()));
     }
 
     private void findViews() {
@@ -53,22 +78,25 @@ public class MainActivity extends AppCompatActivity {
         btn_Menu = findViewById(R.id.btn_MainActivity_Menu);
         btn_Customers = findViewById(R.id.btn_MainActivity_Customers);
         btn_Category = findViewById(R.id.btn_MainActivity_Category);
+        txt_CategoryNo = findViewById(R.id.txt_Selector_NoCategory);
+        txt_CustomerNo = findViewById(R.id.txt_Selector_NoCustomers);
+        txt_ProductNo = findViewById(R.id.txt_Selector_NoProducts);
     }
 
     private void setListeners() {
         btn_Menu.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, ProductsActivity.class));
-            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         });
 
         btn_Customers.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, CustomersActivity.class));
-            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         });
 
         btn_Category.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, CategoryActivity.class));
-            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         });
 
     }
