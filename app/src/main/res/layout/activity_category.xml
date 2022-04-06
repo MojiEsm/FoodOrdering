@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".activities.CategoryActivity">
 
-    <include
-        android:id="@+id/include_Category_Back"
-        layout="@layout/toolbar_back_title"/>
+<!--    <include-->
+<!--        android:id="@+id/include_Category_Back"-->
+<!--        layout="@layout/toolbar_search"/>-->
+<!--    android:layout_below="@id/include_Category_Back"-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RV_Category"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/include_Category_Back"
         android:clipToPadding="false" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

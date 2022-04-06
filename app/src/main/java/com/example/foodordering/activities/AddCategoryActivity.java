@@ -60,6 +60,7 @@ public class AddCategoryActivity extends AppCompatActivity {
     }
 
     private void designs() {
+        getSupportActionBar().hide();
         txt_title.setText("اضافه کردن دسته");
 
         if (categoryModel != null) {
@@ -136,5 +137,11 @@ public class AddCategoryActivity extends AppCompatActivity {
                 enCodedImage = Base64.encodeToString(imageByte, Base64.DEFAULT);
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishVoid();
     }
 }

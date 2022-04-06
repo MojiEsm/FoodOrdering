@@ -45,6 +45,7 @@ public class AddCustomerActivity extends AppCompatActivity {
     }
 
     private void designs() {
+        getSupportActionBar().hide();
         txt_Title.setText("اضافه کردن کاربر");
 
         if (customerModel != null) {
@@ -98,4 +99,9 @@ public class AddCustomerActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishVoid();
+    }
 }

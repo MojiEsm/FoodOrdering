@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private CardView btn_Menu, btn_Customers, btn_Category;
 
     private TextView txt_CustomerNo, txt_ProductNo, txt_CategoryNo;
+    private TextView btn_AddOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.bgStatus));
+        getSupportActionBar().hide();
 
         //State Selector
         txt_CategoryNo.setText(String.valueOf(categoryDao.getList().size()));
@@ -81,22 +83,32 @@ public class MainActivity extends AppCompatActivity {
         txt_CategoryNo = findViewById(R.id.txt_Selector_NoCategory);
         txt_CustomerNo = findViewById(R.id.txt_Selector_NoCustomers);
         txt_ProductNo = findViewById(R.id.txt_Selector_NoProducts);
+        btn_AddOrder = findViewById(R.id.btn_ToolbarMain_AddOrder);
     }
 
     private void setListeners() {
+        btn_AddOrder.setOnClickListener(v->{
+            startActivity(new Intent(MainActivity.this,AddOrder.class));
+            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+            finish();
+        });
+
         btn_Menu.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, ProductsActivity.class));
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            finish();
         });
 
         btn_Customers.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, CustomersActivity.class));
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            finish();
         });
 
         btn_Category.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, CategoryActivity.class));
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            finish();
         });
 
     }

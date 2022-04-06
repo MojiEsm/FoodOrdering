@@ -1,9 +1,11 @@
 package com.example.foodordering.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -21,8 +23,10 @@ public class Login_Activity extends AppCompatActivity {
     }
 
     private void designs() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         //FullScreen
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
     }
 
     private void findViews() {
@@ -32,11 +36,11 @@ public class Login_Activity extends AppCompatActivity {
     }
 
     private void setListeners() {
-        btn_Back.setOnClickListener(v->{
-            startActivity(new Intent(Login_Activity.this,SplashActivity.class));
-            finish();
-            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-        });
+//        btn_Back.setOnClickListener(v->{
+//            startActivity(new Intent(Login_Activity.this,SplashActivity.class));
+//            finish();
+//            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+//        });
 
         btn_Login.setOnClickListener(v->{
             startActivity(new Intent(Login_Activity.this, MainActivity.class));

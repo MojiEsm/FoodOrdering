@@ -1,18 +1,15 @@
 package com.example.foodordering.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.TypedValue;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.SearchView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,14 +20,10 @@ import com.example.foodordering.database.dao.CategoryDao;
 import com.example.foodordering.models.CategoryModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
-
 public class CategoryActivity extends AppCompatActivity {
-    private TextView txt_Title, btn_Back;
     private FloatingActionButton fab_add;
     private RecyclerView recyclerView;
     private Adapter_Category_RV adapterCategoryRv;
@@ -51,27 +44,50 @@ public class CategoryActivity extends AppCompatActivity {
         adapter();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search_customer, menu);
+
+        MenuItem item = menu.findItem(R.id.menu_SearchCustomer_Search);
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapterCategoryRv.getFilter().filter(s);
+                return false;
+            }
+        });
+        return true;
+    }
+
     private void db() {
         db = DataBaseHelper.getInstance(this);
         listData = db.categoryDao().getList();
     }
 
     private void designs() {
-        txt_Title.setText("دسته بندی");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_ios_white_24);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#37342f")));
+        getSupportActionBar().setTitle("دسته بندی");
     }
 
     private void findViews() {
-        txt_Title = findViewById(R.id.txt_toolbarBackTitle_Title);
-        btn_Back = findViewById(R.id.btn_toolbarBackTitle_Back);
         fab_add = findViewById(R.id.fab_Category_Add);
         recyclerView = findViewById(R.id.RV_Category);
     }
 
     private void setListeners() {
-        btn_Back.setOnClickListener(v -> {
-            finish();
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        });
+//        btn_Back.setOnClickListener(v -> {
+//            startActivity(new Intent(CategoryActivity.this,MainActivity.class));
+//            finish();
+//            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+//        });
         fab_add.setOnClickListener(v -> {
             startActivity(new Intent(CategoryActivity.this, AddCategoryActivity.class));
             finish();
@@ -85,4 +101,11 @@ public class CategoryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(CategoryActivity.this, MainActivity.class));
+        finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
 }

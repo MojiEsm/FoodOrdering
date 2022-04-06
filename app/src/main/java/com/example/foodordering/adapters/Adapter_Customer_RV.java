@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,20 +27,33 @@ import com.example.foodordering.activities.AddCustomerActivity;
 import com.example.foodordering.database.DataBaseHelper;
 import com.example.foodordering.database.dao.CustomersDao;
 import com.example.foodordering.models.CustomerModel;
+import com.example.foodordering.models.ProductsModel;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
-public class Adapter_Customer_RV extends RecyclerView.Adapter<Adapter_Customer_RV.MyVeiwHolder> {
+public class Adapter_Customer_RV extends RecyclerView.Adapter<Adapter_Customer_RV.MyVeiwHolder> implements Filterable {
     private Context context;
     private List<CustomerModel> listData;
+    private List<CustomerModel> exampleListData;
 
     private DataBaseHelper dataBaseHelper;
     private CustomersDao customersDao;
+    Listener listener;
 
-    public Adapter_Customer_RV(Context context, List<CustomerModel> listData) {
+
+    public Adapter_Customer_RV(Context context, List<CustomerModel> listData, Listener listener) {
         this.context = context;
+        this.listener = listener;
         this.listData = listData;
+        exampleListData = new ArrayList<>(listData);
         notifyDataSetChanged();
+    }
+
+    public interface Listener {
+        void onClick(CustomerModel customerModel, int pos);
     }
 
     @NonNull
@@ -85,59 +100,98 @@ public class Adapter_Customer_RV extends RecyclerView.Adapter<Adapter_Customer_R
 
         private void setListeners() {
             cardViewRoot.setOnClickListener(v -> {
-                showDialog();
+                CustomerModel customerModel = listData.get(getAdapterPosition());
+                listener.onClick(customerModel, getAdapterPosition());
             });
         }
+    }
 
-        private void showDialog() {
-            CustomerModel customerModel = listData.get(getAdapterPosition());
-            final Dialog dialog = new Dialog(context);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.bottom_sheet_ud);
+    @Override
+    public Filter getFilter() {
+        return valueFilter;
+    }
 
-            TextView btn_Edit = dialog.findViewById(R.id.btn_Edit_BottomSheet);
-            TextView btn_Delete = dialog.findViewById(R.id.btn_Delete_BottomSheet);
-
-            btn_Edit.setOnClickListener(v -> {
-                Intent intent = new Intent(context, AddCustomerActivity.class);
-                intent.putExtra("objectCustomer", customerModel);
-                context.startActivity(intent);
-                ((Activity) context).finish();
-
-            });
-
-            btn_Delete.setOnClickListener(v -> {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("حذف");
-                builder.setMessage("آیا مایل به حذف هستید؟");
-                builder.setPositiveButton("بله", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        customersDao.delete(customerModel);
-                        listData.remove(customerModel);
-                        notifyDataSetChanged();
-                        Toast.makeText(context, "مشتری حذف شد.", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
+    private Filter valueFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<CustomerModel> filteredList = new ArrayList<>();
+            if (charSequence==null|| charSequence.length()==0){
+                filteredList.addAll(exampleListData);
+            }else{
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (CustomerModel item :exampleListData){
+                    if (item.fullName.toLowerCase().contains(filterPattern)){
+                        filteredList.add(item);
                     }
-                });
-                builder.setNegativeButton("خیر", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-            });
-
-
-            dialog.show();
-            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogThemeBottomSheet;
-            dialog.getWindow().setGravity(Gravity.BOTTOM);
-
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
         }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            listData.clear();
+            listData.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
+
+
+
+
+    public void showDialog(int pos) {
+        CustomerModel customerModel = listData.get(pos);
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.bottom_sheet_ud);
+
+        TextView btn_Edit = dialog.findViewById(R.id.btn_Edit_BottomSheet);
+        TextView btn_Delete = dialog.findViewById(R.id.btn_Delete_BottomSheet);
+
+        btn_Edit.setOnClickListener(v -> {
+            Intent intent = new Intent(context, AddCustomerActivity.class);
+            intent.putExtra("objectCustomer", customerModel);
+            context.startActivity(intent);
+            ((Activity) context).finish();
+
+        });
+
+        btn_Delete.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("حذف");
+            builder.setMessage("آیا مایل به حذف هستید؟");
+            builder.setPositiveButton("بله", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    customersDao.delete(customerModel);
+                    listData.remove(customerModel);
+                    notifyDataSetChanged();
+                    Toast.makeText(context, "مشتری حذف شد.", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            });
+            builder.setNegativeButton("خیر", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        });
+
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogThemeBottomSheet;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
 
     }
+
+
+
+
 }

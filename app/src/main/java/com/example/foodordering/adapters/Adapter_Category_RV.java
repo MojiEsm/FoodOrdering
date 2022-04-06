@@ -6,23 +6,21 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodordering.R;
@@ -32,13 +30,13 @@ import com.example.foodordering.database.DataBaseHelper;
 import com.example.foodordering.database.dao.CategoryDao;
 import com.example.foodordering.models.CategoryModel;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Adapter_Category_RV extends RecyclerView.Adapter<Adapter_Category_RV.MyViewHolder> {
+public class Adapter_Category_RV extends RecyclerView.Adapter<Adapter_Category_RV.MyViewHolder> implements Filterable {
     private Context context;
     private List<CategoryModel> listData;
+    private List<CategoryModel> listDataFilter;
 
     private DataBaseHelper dataBaseHelper;
     private CategoryDao categoryDao;
@@ -48,6 +46,7 @@ public class Adapter_Category_RV extends RecyclerView.Adapter<Adapter_Category_R
     public Adapter_Category_RV(Context context, List<CategoryModel> ltData) {
         this.context = context;
         this.listData = ltData;
+        listDataFilter = new ArrayList<>(ltData);
     }
 
     @NonNull
@@ -73,6 +72,39 @@ public class Adapter_Category_RV extends RecyclerView.Adapter<Adapter_Category_R
     public int getItemCount() {
         return listData.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return valueFilter;
+    }
+
+    private Filter valueFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<CategoryModel> filteredList = new ArrayList<>();
+            if (charSequence == null || charSequence.length() == 0) {
+                filteredList.addAll(listDataFilter);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (CategoryModel item : listDataFilter) {
+                    if (item.name.toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            listData.clear();
+            listData.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView txt_title;

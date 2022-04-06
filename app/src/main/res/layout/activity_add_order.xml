@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.AddOrder">
+
+    <include
+        android:id="@+id/toolbar_AddOrder"
+        layout="@layout/toolbar_back_title" />
+
+    <LinearLayout
+        android:id="@+id/lnr_Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_AddOrder"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_AddOrder_Time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/irsansfanum"
+            android:padding="10dp"
+            android:text="12:20"
+            android:textAlignment="center"
+            android:textColor="@color/textColor"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/txt_AddOrder_Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/irsansfanum"
+            android:padding="10dp"
+            android:text="1/1/2022"
+            android:textAlignment="center"
+            android:textColor="@color/textColor"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btn_AddOrder_ChooseCustomer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lnr_Date"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border_spinner_add_food"
+        android:fontFamily="@font/iransans"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        android:text="مشتری"
+        android:textColor="@color/textColor"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/btn_AddOrder_ChooseProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_AddOrder_ChooseCustomer"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border_spinner_add_food"
+        android:fontFamily="@font/iransans"
+        android:paddingVertical="10dp"
+        android:paddingRight="10dp"
+        android:text="انتخاب محصول"
+        android:textColor="@color/textColor"
+        android:textSize="16dp" />
+
+    <ScrollView
+        android:id="@+id/scrollView_AddOrdering"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/lnr_addOrder_Bottom"
+        android:layout_below="@id/btn_AddOrder_ChooseProduct"
+        android:padding="10dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_AddOrder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/lnr_addOrder_Bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/iransans"
+            android:paddingLeft="10dp"
+            android:text="مجموع:"
+            android:textColor="@color/textColor"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/txt_Addorder_Price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/irsansfanum"
+            android:paddingLeft="10dp"
+            android:text="0"
+            android:textColor="@color/textColor"
+            android:textSize="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left">
+
+            <TextView
+                android:id="@+id/btn_AddOrder_AddOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_button_splash"
+                android:fontFamily="@font/iransans"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="10dp"
+                android:text="ثبت"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

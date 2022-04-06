@@ -71,14 +71,15 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     private void designs() {
+        getSupportActionBar().hide();
         txt_Title.setText("اضافه کردن محصول");
         //Spinner
         adapterFoodMenuSpinner = new Adapter_FoodMenu_Spinner(this, R.layout.item_spinner_addfood);
         adapterFoodMenuSpinner.addAll(str);
         if (productsModel != null) {
             //Get Intent
-            if (productsModel.img != null) {
-                circleImageView.setImageBitmap(enDeCode.decode(productsModel.img));
+            if (productsModel.picture != null) {
+                circleImageView.setImageBitmap(enDeCode.decode(productsModel.picture));
             }
             edt_FoodName.setText(productsModel.name);
             edt_Price.setText(String.valueOf(productsModel.price));
@@ -125,7 +126,7 @@ public class AddProductActivity extends AppCompatActivity {
                     Toast.makeText(this, "ثبت شد!", Toast.LENGTH_SHORT).show();
                     finishVoid();
                 } else {
-                    int sID = productsModel.id;
+                    int sID = productsModel.product_id;
                     productDao.update(sID, sName, encodedImage, valueSpin, Integer.valueOf(iPrice));
                     Toast.makeText(this, "ویرایش شد.", Toast.LENGTH_SHORT).show();
                     finishVoid();
@@ -164,5 +165,9 @@ public class AddProductActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishVoid();
+    }
 }

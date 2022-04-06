@@ -11,13 +11,10 @@ import java.io.Serializable;
 public class ProductsModel implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public int product_id;
 
     @ColumnInfo(name = "name")
     public String name;
-
-    @ColumnInfo(name = "img")
-    public String img;
 
     @ColumnInfo(name = "category")
     public String category;
@@ -25,59 +22,26 @@ public class ProductsModel implements Serializable {
     @ColumnInfo(name = "price")
     public Integer price;
 
-    public ProductsModel(int id, String name, String img, String category, Integer price) {
-        this.id = id;
+    @ColumnInfo(name = "picture")
+    public String picture;
+
+    @Ignore
+    public int amount = 1;
+
+    public ProductsModel(int product_id, String name, String picture, String category, Integer price) {
+        this.product_id = product_id;
         this.name = name;
-        this.img = img;
+        this.picture = picture;
         this.category = category;
         this.price = price;
     }
 
     @Ignore
-    public ProductsModel(String name, String img, String category, Integer price) {
+    public ProductsModel(String name, String picture, String category, Integer price) {
         this.name = name;
-        this.img = img;
+        this.picture = picture;
         this.category = category;
         this.price = price;
     }
-    //    public int getPrice() {
-//        return Price;
-//    }
-//
-//    public void setPrice(int price) {
-//        Price = price;
-//    }
-//
-//    public String getName() {
-//        return Name;
-//    }
-//
-//    public String getIMG() {
-//        return IMG;
-//    }
-//
-//
-//    public void setName(String name) {
-//        Name = name;
-//    }
-//
-//    public void setIMG(String IMG) {
-//        this.IMG = IMG;
-//    }
-//
-//    public int getID() {
-//        return id;
-//    }
-//
-//    public void setID(int id) {
-//        this.id = id;
-//    }
-//
-//    public String getCategory() {
-//        return Category;
-//    }
-//
-//    public void setCategory(String category) {
-//        Category = category;
-//    }
+
 }

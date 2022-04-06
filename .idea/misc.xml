@@ -13,16 +13,19 @@
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/border_til_login.xml" value="0.24166666666666667" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/dialog_check_connection.xml" value="0.24166666666666667" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/ic_baseline_arrow_back_ios_white_24.xml" value="0.24166666666666667" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.32222222222222224" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/drawable/ripple_button_splash.xml" value="0.24166666666666667" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_add_category.xml" value="0.240625" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_add_customer.xml" value="0.240625" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_add_food_menu.xml" value="0.4" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_add_order.xml" value="0.3" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_add_product.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_category.xml" value="0.240625" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_customers.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_login.xml" value="0.268" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_main.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_menu.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_products.xml" value="0.125" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/activity_splash.xml" value="0.240625" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/bottom_sheet_ud.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/dialog_check_connection.xml" value="0.2546875" />
@@ -39,10 +42,14 @@
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_category_rv.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_customer_rv.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_menu_food_rv.xml" value="0.268" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_order_rv.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_product_category.xml" value="0.3671875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_products_rv.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/item_spinner_addfood.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/toolbar_back_splash.xml" value="0.2546875" />
         <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/toolbar_back_title.xml" value="0.2546875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/layout/toolbar_search.xml" value="0.3671875" />
+        <entry key="..\:/project/android/Main/FoodOrdering/app/src/main/res/menu/menu_search_customer.xml" value="0.3671875" />
       </map>
     </option>
   </component>
