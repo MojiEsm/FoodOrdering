@@ -71,6 +71,8 @@ public class Adapter_Products_RV extends RecyclerView.Adapter<Adapter_Products_R
                 for (ProductsModel item : listDataFilter){
                     if (item.name.toLowerCase().contains(filterPattern)){
                         filteredList.add(item);
+                    }else if (item.category.toLowerCase().contains(filterPattern)){
+                        filteredList.add(item);
                     }
                 }
             }

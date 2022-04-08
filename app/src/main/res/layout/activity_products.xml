@@ -6,15 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activities.ProductsActivity">
 
-<!--    <include-->
-<!--        android:id="@+id/toolbar_MenuAct"-->
-<!--        layout="@layout/toolbar_search" />-->
-<!--    android:layout_below="@id/toolbar_MenuAct"-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RV_Product_Category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:padding="5dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RV_FoodMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/RV_Product_Category"
         android:clipToPadding="false"
         android:padding="5dp" />
 
