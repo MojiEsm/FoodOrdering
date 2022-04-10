@@ -1,6 +1,5 @@
 package com.example.foodordering.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -8,15 +7,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodordering.R;
+import com.example.foodordering.classes.Tools;
 import com.example.foodordering.database.DataBaseHelper;
 import com.example.foodordering.database.dao.CustomersDao;
 import com.example.foodordering.models.CustomerModel;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AddCustomerActivity extends AppCompatActivity {
+    private Tools tools = new Tools();
     private DataBaseHelper dataBaseHelper;
     private CustomersDao customersDao;
 
@@ -94,9 +92,7 @@ public class AddCustomerActivity extends AppCompatActivity {
     }
 
     private void finishVoid() {
-        startActivity(new Intent(AddCustomerActivity.this, CustomersActivity.class));
-        finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        tools.startActivity(this, getApplication(), CustomersActivity.class);
     }
 
     @Override

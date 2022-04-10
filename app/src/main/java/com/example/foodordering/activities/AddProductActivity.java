@@ -2,7 +2,6 @@ package com.example.foodordering.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.foodordering.R;
 import com.example.foodordering.adapters.Adapter_FoodMenu_Spinner;
 import com.example.foodordering.classes.EnDeCode;
+import com.example.foodordering.classes.Tools;
 import com.example.foodordering.database.DataBaseHelper;
 import com.example.foodordering.database.dao.CategoryDao;
 import com.example.foodordering.database.dao.ProductDao;
@@ -30,6 +30,7 @@ import java.io.IOException;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AddProductActivity extends AppCompatActivity {
+    private Tools tools = new Tools();
     private DataBaseHelper dataBaseHelper;
     private ProductDao productDao;
     private CategoryDao categoryDao;
@@ -138,9 +139,7 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     private void finishVoid() {
-        startActivity(new Intent(AddProductActivity.this, ProductsActivity.class));
-        finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        tools.startActivity(this,getApplication(),ProductsActivity.class);
     }
 
     @Override

@@ -9,12 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodordering.R;
 import com.example.foodordering.adapters.Adapter_Customer_RV;
+import com.example.foodordering.classes.Tools;
 import com.example.foodordering.database.DataBaseHelper;
 import com.example.foodordering.models.CustomerModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomersActivity extends AppCompatActivity {
+    private Tools tools = new Tools();
     private RecyclerView recyclerView;
     private FloatingActionButton fab_Add;
     private Adapter_Customer_RV adapterCustomerRv;
@@ -47,7 +50,7 @@ public class CustomersActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_search_customer,menu);
+        getMenuInflater().inflate(R.menu.menu_search_customer, menu);
 
         MenuItem menuItem = menu.findItem(R.id.menu_SearchCustomer_Search);
         SearchView searchView = (SearchView) menuItem.getActionView();
@@ -75,12 +78,12 @@ public class CustomersActivity extends AppCompatActivity {
         adapterCustomerRv = new Adapter_Customer_RV(this, listData, new Adapter_Customer_RV.Listener() {
             @Override
             public void onClick(CustomerModel customerModel, int pos) {
-                if(for_order){
+                if (for_order) {
                     Intent intent = new Intent();
                     intent.putExtra("customer_gson", new Gson().toJson(customerModel));
                     setResult(Activity.RESULT_OK, intent);
                     finish();
-                }else adapterCustomerRv.showDialog(pos);
+                } else adapterCustomerRv.showDialog(pos);
             }
         });
 
@@ -90,16 +93,9 @@ public class CustomersActivity extends AppCompatActivity {
 
     private void setListeners() {
         fab_Add.setOnClickListener(v -> {
-            startActivity(new Intent(CustomersActivity.this, AddCustomerActivity.class));
-            finish();
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            tools.startActivity(this, getApplication(), AddCustomerActivity.class);
         });
 
-//        btn_Back.setOnClickListener(v -> {
-//            startActivity(new Intent(CustomersActivity.this,MainActivity.class));
-//            finish();
-//            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-//        });
     }
 
     private void findViews() {
@@ -115,10 +111,21 @@ public class CustomersActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (!for_order) {
+                    tools.startActivity(this, getApplication(), MainActivity.class);
+                } else {
+                    tools.startActivity(this, getApplication(), AddOrder.class);
+                }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(CustomersActivity.this,MainActivity.class));
-        finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        tools.startActivity(this, getApplication(), MainActivity.class);
     }
 }

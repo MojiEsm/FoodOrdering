@@ -1,6 +1,5 @@
 package com.example.foodordering.activities;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -8,13 +7,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodordering.R;
 import com.example.foodordering.adapters.Adapter_Category_RV;
+import com.example.foodordering.classes.Tools;
 import com.example.foodordering.database.DataBaseHelper;
 import com.example.foodordering.database.dao.CategoryDao;
 import com.example.foodordering.models.CategoryModel;
@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity {
+    private Tools tools = new Tools();
+
     private FloatingActionButton fab_add;
     private RecyclerView recyclerView;
     private Adapter_Category_RV adapterCategoryRv;
@@ -83,15 +85,9 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
-//        btn_Back.setOnClickListener(v -> {
-//            startActivity(new Intent(CategoryActivity.this,MainActivity.class));
-//            finish();
-//            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-//        });
+
         fab_add.setOnClickListener(v -> {
-            startActivity(new Intent(CategoryActivity.this, AddCategoryActivity.class));
-            finish();
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            tools.startActivity(this, getApplication(), AddCategoryActivity.class);
         });
     }
 
@@ -102,10 +98,18 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                tools.startActivity(this, getApplication(), MainActivity.class);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(CategoryActivity.this, MainActivity.class));
-        finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        tools.startActivity(this, getApplication(), MainActivity.class);
     }
 }

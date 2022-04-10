@@ -9,8 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,9 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodordering.R;
 import com.example.foodordering.adapters.Adapter_ProductCategory_RV;
 import com.example.foodordering.adapters.Adapter_Products_RV;
+import com.example.foodordering.classes.Tools;
 import com.example.foodordering.database.DataBaseHelper;
-import com.example.foodordering.database.dao.ProductDao;
-import com.example.foodordering.models.CategoryModel;
 import com.example.foodordering.models.ProductsModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -30,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsActivity extends AppCompatActivity {
+    private Tools tools = new Tools();
     private DataBaseHelper dataBaseHelper;
 
     private RecyclerView rv_Products, rv_Category;
@@ -79,16 +79,8 @@ public class ProductsActivity extends AppCompatActivity {
 
     private void setListeners() {
         fab.setOnClickListener(v -> {
-            startActivity(new Intent(ProductsActivity.this, AddProductActivity.class));
-            finish();
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            tools.startActivity(this, getApplication(), AddProductActivity.class);
         });
-//        btn_Back.setOnClickListener(v -> {
-//            startActivity(new Intent(ProductsActivity.this, MainActivity.class));
-//            finish();
-//            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-//        });
-
     }
 
     private void adapter() {
@@ -151,10 +143,21 @@ public class ProductsActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (!for_order) {
+                    tools.startActivity(this, getApplication(), MainActivity.class);
+                } else {
+                    tools.startActivity(this, getApplication(), AddOrder.class);
+                }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(ProductsActivity.this, MainActivity.class));
-        finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        tools.startActivity(this, getApplication(), MainActivity.class);
     }
 }

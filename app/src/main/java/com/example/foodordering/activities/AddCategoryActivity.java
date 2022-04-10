@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodordering.R;
 import com.example.foodordering.classes.EnDeCode;
+import com.example.foodordering.classes.Tools;
 import com.example.foodordering.database.DataBaseHelper;
 import com.example.foodordering.database.dao.CategoryDao;
 import com.example.foodordering.models.CategoryModel;
@@ -26,6 +27,7 @@ import java.io.IOException;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AddCategoryActivity extends AppCompatActivity {
+    private Tools tools = new Tools();
 
     private DataBaseHelper db;
     private CategoryDao dao;
@@ -85,9 +87,7 @@ public class AddCategoryActivity extends AppCompatActivity {
 
     private void setListeners() {
         btn_Back.setOnClickListener(v -> {
-            startActivity(new Intent(AddCategoryActivity.this, CategoryActivity.class));
-            finish();
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            tools.startActivity(this, getApplication(), CategoryActivity.class);
         });
         btn_ChooseIMG.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -112,9 +112,7 @@ public class AddCategoryActivity extends AppCompatActivity {
     }
 
     private void finishVoid() {
-        startActivity(new Intent(AddCategoryActivity.this, CategoryActivity.class));
-        finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        tools.startActivity(this, getApplication(), CategoryActivity.class);
     }
 
     @Override

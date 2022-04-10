@@ -87,9 +87,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
-        btn_AddOrder.setOnClickListener(v->{
-            startActivity(new Intent(MainActivity.this,AddOrder.class));
-            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+        btn_AddOrder.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, AddOrder.class));
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             finish();
         });
 

@@ -17,18 +17,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodordering.R;
 import com.example.foodordering.adapters.Adapter_AddOrder_RV;
+import com.example.foodordering.classes.Tools;
 import com.example.foodordering.models.CustomerModel;
 import com.example.foodordering.models.ProductsModel;
 import com.google.gson.Gson;
-import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class AddOrder extends AppCompatActivity {
+    private Tools tools = new Tools();
     private Adapter_AddOrder_RV adapterAddOrderRv;
     private ArrayList<ProductsModel> listData = new ArrayList<>();
 
@@ -103,9 +103,7 @@ public class AddOrder extends AppCompatActivity {
         });
 
         btn_back.setOnClickListener(v -> {
-            startActivity(new Intent(AddOrder.this, MainActivity.class));
-            finish();
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            tools.startActivity(this, getApplication(), MainActivity.class);
         });
 
         btn_ChooseCustomer.setOnClickListener(v -> {
@@ -260,7 +258,6 @@ public class AddOrder extends AppCompatActivity {
         for (int i = 0; i < listData.size(); i++) {
             if (listData.get(i).product_id == product.product_id) {
                 listData.get(i).amount = listData.get(i).amount + 1;
-                Log.e("Mahdi", "insertToOrderList: " + listData.get(i).product_id + " == " + product.product_id);
                 adapterAddOrderRv.notifyDataSetChanged();
                 initCounter();
                 return;
@@ -295,8 +292,6 @@ public class AddOrder extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(AddOrder.this, MainActivity.class));
-        finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        tools.startActivity(this, getApplication(), MainActivity.class);
     }
 }
