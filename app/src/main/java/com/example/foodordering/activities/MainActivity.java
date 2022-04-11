@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.example.foodordering.R;
+import com.example.foodordering.classes.Tools;
 import com.example.foodordering.database.DataBaseHelper;
 import com.example.foodordering.database.dao.CategoryDao;
 import com.example.foodordering.database.dao.CustomersDao;
@@ -27,6 +28,8 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private Tools tools = new Tools();
+
     private DataBaseHelper dataBaseHelper;
     private CategoryDao categoryDao;
     private CustomersDao customersDao;
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private CardView btn_Menu, btn_Customers, btn_Category;
 
     private TextView txt_CustomerNo, txt_ProductNo, txt_CategoryNo;
-    private TextView btn_AddOrder;
+    private TextView btn_AddOrder, btn_Orders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,31 +87,28 @@ public class MainActivity extends AppCompatActivity {
         txt_CustomerNo = findViewById(R.id.txt_Selector_NoCustomers);
         txt_ProductNo = findViewById(R.id.txt_Selector_NoProducts);
         btn_AddOrder = findViewById(R.id.btn_ToolbarMain_AddOrder);
+        btn_Orders = findViewById(R.id.btn_MainActivity_Order);
     }
 
     private void setListeners() {
+        btn_Orders.setOnClickListener(v -> {
+            tools.startActivity(this, getApplication(), OrdersActivity.class);
+        });
+
         btn_AddOrder.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, AddOrder.class));
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            finish();
+            tools.startActivity(this, getApplication(), AddOrder.class);
         });
 
         btn_Menu.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ProductsActivity.class));
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            finish();
+            tools.startActivity(this, getApplication(), ProductsActivity.class);
         });
 
         btn_Customers.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, CustomersActivity.class));
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            finish();
+            tools.startActivity(this, getApplication(), CustomersActivity.class);
         });
 
         btn_Category.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, CategoryActivity.class));
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            finish();
+            tools.startActivity(this, getApplication(), CategoryActivity.class);
         });
 
     }

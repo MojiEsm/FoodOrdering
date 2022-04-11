@@ -7,11 +7,6 @@
     android:background="@color/colorFrontBlack"
     tools:context=".activities.CustomersActivity">
 
-<!--    <include-->
-<!--        android:id="@+id/include_Customers_Back"-->
-<!--        layout="@layout/toolbar_search"/>-->
-    <!--        android:layout_below="@id/include_Customers_Back"-->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RV_Customers"
         android:layout_width="match_parent"

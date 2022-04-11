@@ -21,8 +21,10 @@
                 layout="@layout/include_mainactivity_barchart"/>
 
             <include
-
                 layout="@layout/include_mainactivity_status_sale"/>
+
+            <include
+                layout="@layout/include_mainactivity_orders"/>
 
             <include
                 layout="@layout/include_mainactivity_selector"/>

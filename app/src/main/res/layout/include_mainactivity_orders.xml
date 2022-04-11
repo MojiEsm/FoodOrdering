@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="5dp">
+
+    <TextView
+        android:id="@+id/btn_MainActivity_Order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/iransans"
+        android:gravity="center"
+        android:paddingVertical="20dp"
+        android:text="سفارشات"
+        android:textColor="@color/textColor"
+        android:textSize="18dp" />
+</androidx.cardview.widget.CardView>

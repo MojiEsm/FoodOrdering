@@ -1,14 +1,12 @@
 package com.example.foodordering.activities;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodordering.R;
 import com.example.foodordering.adapters.Adapter_AddOrder_RV;
 import com.example.foodordering.classes.Tools;
+import com.example.foodordering.database.DataBaseHelper;
+import com.example.foodordering.database.dao.AddOrderDao;
+import com.example.foodordering.database.dao.OrderDetailDao;
+import com.example.foodordering.models.AddOrderModel;
 import com.example.foodordering.models.CustomerModel;
+import com.example.foodordering.models.OrderDetailModel;
 import com.example.foodordering.models.ProductsModel;
 import com.google.gson.Gson;
 
@@ -27,12 +30,26 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
+import ir.hamsaa.persiandatepicker.api.PersianPickerDate;
+import ir.hamsaa.persiandatepicker.api.PersianPickerListener;
+import ir.hamsaa.persiandatepicker.date.PersianDateFixedLeapYear;
+import ir.hamsaa.persiandatepicker.util.PersianCalendar;
+
 public class AddOrder extends AppCompatActivity {
+
     private Tools tools = new Tools();
+
+    private DataBaseHelper dataBaseHelper;
+    private AddOrderDao addOrderDao;
+    private OrderDetailDao orderDetailDao;
+
     private Adapter_AddOrder_RV adapterAddOrderRv;
     private ArrayList<ProductsModel> listData = new ArrayList<>();
 
-    private TextView btn_back, txt_Title, txt_date, txt_time, txt_TotalPrice;
+    private CustomerModel customerModel;
+
+    private TextView btn_back, txt_Title, txt_date, txt_time, txt_TotalPrice, btn_AddOrder;
     private TextView btn_ChooseCustomer, btn_ChooseProduct;
 
     private RecyclerView recyclerView;
@@ -41,6 +58,8 @@ public class AddOrder extends AppCompatActivity {
 
     private int hour, minute;
 
+    private String year, month, day;
+
     private String code = String.valueOf(System.currentTimeMillis());
 
     @Override
@@ -48,10 +67,17 @@ public class AddOrder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_order);
 
+        db();
         findViews();
         designs();
         setListeners();
         adapterRV();
+    }
+
+    private void db() {
+        dataBaseHelper = DataBaseHelper.getInstance(this);
+        addOrderDao = dataBaseHelper.addOrderDao();
+        orderDetailDao = dataBaseHelper.orderDetailDao();
     }
 
 
@@ -60,12 +86,13 @@ public class AddOrder extends AppCompatActivity {
         getSupportActionBar().hide();
 
         // Date
+        PersianCalendar persianCalendar = new PersianCalendar();
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatterDate = new SimpleDateFormat("dd-MM-yyyy");
+//        SimpleDateFormat formatterDate = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
-//        txt_date.setText(formatterDate.format(calendar.getTime()));
-        txt_date.setText(getDateToday());
         txt_time.setText(formatterTime.format(calendar.getTime()));
+        txt_date.setText(persianCalendar.getPersianShortDate());
+
     }
 
 
@@ -77,11 +104,28 @@ public class AddOrder extends AppCompatActivity {
         txt_TotalPrice = findViewById(R.id.txt_Addorder_Price);
         btn_ChooseCustomer = findViewById(R.id.btn_AddOrder_ChooseCustomer);
         btn_ChooseProduct = findViewById(R.id.btn_AddOrder_ChooseProduct);
+        btn_AddOrder = findViewById(R.id.btn_AddOrder_AddOrder);
         recyclerView = findViewById(R.id.rv_AddOrder);
 
     }
 
     private void setListeners() {
+        btn_AddOrder.setOnClickListener(v -> {
+            if (btn_ChooseCustomer.getText().toString().equals("مشتری") || listData.size() == 0) {
+                if (btn_ChooseCustomer.getText().toString().equals("مشتری"))
+                    Toast.makeText(this, "لطفا مشتری را انتخاب کنید.", Toast.LENGTH_SHORT).show();
+                else if (listData.size() == 0)
+                    Toast.makeText(this, "لطفا محصول را انتخاب کنید.", Toast.LENGTH_SHORT).show();
+            } else {
+                String customerName = btn_ChooseCustomer.getText().toString().trim();
+                int totalPrice = Integer.valueOf(txt_TotalPrice.getText().toString());
+                addOrderDao.insert(new AddOrderModel(customerName, code, customerModel.id, "1", totalPrice, "orderDesc", txt_date.getText().toString(), txt_time.getText().toString()));
+                for (int i = 0; i < listData.size(); i++) {
+                    orderDetailDao.insert(new OrderDetailModel(listData.get(i).name, listData.get(i).price, listData.get(i).category, listData.get(i).amount, code, listData.get(i).picture));
+                }
+            }
+        });
+
         txt_time.setOnClickListener(v -> {
             TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
                 @Override
@@ -93,13 +137,41 @@ public class AddOrder extends AppCompatActivity {
                 }
             };
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, hour, minute, true);
-
             timePickerDialog.setTitle("انتخاب زمان");
             timePickerDialog.show();
         });
 
         txt_date.setOnClickListener(v -> {
-            initDatePicker();
+            PersianDatePickerDialog picker = new PersianDatePickerDialog(this)
+                    .setPositiveButtonString("باشه")
+                    .setNegativeButton("بیخیال")
+                    .setTodayButton("امروز")
+                    .setTodayButtonVisible(true)
+                    .setMinYear(PersianDatePickerDialog.THIS_YEAR)
+                    .setInitDate(PersianDatePickerDialog.THIS_YEAR, PersianDatePickerDialog.THIS_MONTH, PersianDatePickerDialog.THIS_DAY)
+                    .setActionTextColor(Color.GRAY)
+//                    .setTypeFace(typeface)
+                    .setTitleType(PersianDatePickerDialog.WEEKDAY_DAY_MONTH_YEAR)
+                    .setShowInBottomSheet(true)
+                    .setListener(new PersianPickerListener() {
+                        @Override
+                        public void onDateSelected(PersianPickerDate persianPickerDate) {
+//                            Log.d("TAG", "onDateSelected: " + persianPickerDate.getTimestamp());//675930448000
+//                            Log.d("TAG", "onDateSelected: " + persianPickerDate.getGregorianDate());//Mon Jun 03 10:57:28 GMT+04:30 1991
+//                            Log.d("TAG", "onDateSelected: " + persianPickerDate.getPersianLongDate());// دوشنبه  13  خرداد  1370
+//                            Log.d("TAG", "onDateSelected: " + persianPickerDate.getPersianMonthName());//خرداد
+//                            Log.d("TAG", "onDateSelected: " + PersianCalendarUtils.isPersianLeapYear(persianPickerDate.getPersianYear()));//true
+//                            Toast.makeText(getApplicationContext(), persianPickerDate.getPersianYear() + "/" + persianPickerDate.getPersianMonth() + "/" + persianPickerDate.getPersianDay(), Toast.LENGTH_SHORT).show();
+                            txt_date.setText(persianPickerDate.getPersianYear() + "/" + persianPickerDate.getPersianMonth() + "/" + persianPickerDate.getPersianDay());
+                        }
+
+                        @Override
+                        public void onDismissed() {
+                            txt_date.setText(PersianDatePickerDialog.THIS_YEAR + "/" + PersianDatePickerDialog.THIS_MONTH + "/" + PersianDatePickerDialog.THIS_DAY);
+                        }
+                    });
+
+            picker.show();
         });
 
         btn_back.setOnClickListener(v -> {
@@ -118,81 +190,6 @@ public class AddOrder extends AppCompatActivity {
             startActivityForResult(intent, 2);
         });
 
-    }
-
-    private String getDateToday() {
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        month = month + 1;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        return makeDateString(day, month, year);
-
-    }
-
-    private void initDatePicker() {
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                String date = makeDateString(day, month, year);
-                txt_date.setText(date);
-
-            }
-        };
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-
-        int style = AlertDialog.THEME_HOLO_DARK;
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, dateSetListener, year, month, day);
-        datePickerDialog.show();
-    }
-
-    private String makeDateString(int day, int month, int year) {
-        return getMonthFormat(month) + " " + day + " " + year;
-    }
-
-    private String getMonthFormat(int month) {
-        if (month == 1) {
-            return "JAN";
-        }
-        if (month == 2) {
-            return "FEB";
-        }
-        if (month == 3) {
-            return "MAR";
-        }
-        if (month == 4) {
-            return "APR";
-        }
-        if (month == 5) {
-            return "MAY";
-        }
-        if (month == 6) {
-            return "JUN";
-        }
-        if (month == 7) {
-            return "JUL";
-        }
-        if (month == 8) {
-            return "AUG";
-        }
-        if (month == 9) {
-            return "SEP";
-        }
-        if (month == 10) {
-            return "OCT";
-        }
-        if (month == 11) {
-            return "NOV";
-        }
-        if (month == 12) {
-            return "DEC";
-        }
-        return "JAN";
     }
 
 
@@ -230,7 +227,7 @@ public class AddOrder extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
 
                 String getCustomer = data.getExtras().getString("customer_gson");
-                CustomerModel customerModel = new Gson().fromJson(getCustomer, CustomerModel.class);
+                customerModel = new Gson().fromJson(getCustomer, CustomerModel.class);
                 btn_ChooseCustomer.setText(customerModel.fullName);
                 if (customerModel != null) {
                     btn_ChooseCustomer.setText(customerModel.fullName);
@@ -294,4 +291,6 @@ public class AddOrder extends AppCompatActivity {
         super.onBackPressed();
         tools.startActivity(this, getApplication(), MainActivity.class);
     }
+
+
 }
